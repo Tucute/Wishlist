@@ -62,13 +62,13 @@
                                 ?>
                                 <div class="menu-item">
                                     <div class="menu-item-img">
-                                        <a href="http://localhost/Project_PHP/source_code/pages/Menu/Detail/index.php?idProduct=<?php echo $_SESSION['item'][$i]['id'] ?>" title="Cà phê sữa đá">
-                                            <img src="./img_WebCoffee/<?php echo $_SESSION['item'][$i]['image'] ?>" alt="">
+                                        <a href="http://localhost/Wishlist/Menu/Detail/?idProduct=<?php echo $_SESSION['item'][$i]['id'] ?>" title="Cà phê sữa đá">
+                                            <img src="../img_WebCoffee/image/<?php echo $_SESSION['item'][$i]['image'] ?>" alt="">
                                         </a>
                                     </div>
                                     <div class="menu-item-info">
                                         <h5>
-                                            <a href="http://localhost/Project_PHP/source_code/pages/Menu/Detail/index.php?idProduct=<?php echo $_SESSION['item'][$i]['id'] ?>"><?php echo $_SESSION['item'][$i]['Name'] ?></a>
+                                            <a href="http://localhost/Wishlist/Menu/Detail/?idProduct=<?php echo $_SESSION['item'][$i]['id'] ?>"><?php echo $_SESSION['item'][$i]['Name'] ?></a>
                                         </h5>
                                         <div class="price">
                                             <?php echo $_SESSION['item'][$i]['Price'] ?> đ

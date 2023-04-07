@@ -40,7 +40,7 @@
                 }
             ?>
             <div class="image">
-                <img src="./img_WebCoffee/<?php echo $row['image'] ?>" alt="" width="570px" height="570px">
+                <img src="../img_WebCoffee/image/<?php echo $row['image'] ?>" alt="" width="570px" height="570px">
             </div>
             <div class="content-section1">
                 <div class="title">
@@ -77,11 +77,35 @@
                                 </button> 
                                 <input type="text" name="amount" id="amount" defaulValue="1" value="<?php echo $amount ?>" >
                                 <button type="submit" name="btn-plus">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                     </svg>
                                 </button>  
                             </div> 
+                            <br>
+                            <br>
+                        
+                            <div>
+                                <label for=""> THêm vào yêu thích: </label>
+                                <button type="submit" name="btn-like">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </button>
+                        <?php
+                            if(isset($_POST['btn-like'])) {
+                                $idUser = 0;
+                                $idProduct = $_SESSION['idProduct'];
+                                $result = mysqli_query($conn, "SELECT ItemID FROM wishlist WHERE UserID = $idUser");
+                                $tmp = mysqli_fetch_assoc($result);
+                                $idPr = $tmp['ItemID'];
+                                if ($idPr != $idProduct) {
+                                    $sql = mysqli_query($conn, "INSERT INTO wishlist (ItemID, UserID) VALUES ($idProduct, $idUser)" )   ;
+                                    echo "<script> alert ('Đã thêm vào danh sách yêu thích !') </script>" ;
+                                }
+                               
+                            }
+                        ?>
+                            </div>
                         </form> 
                     </div>                   
                     <div class="btn-buy">
@@ -96,42 +120,15 @@
                             <a href="#">Mua ngay</a>
                         </button>
                         
+                        
                     </div>
                 </div>
-            </div>
-        </div>
-        <hr>
-        <div class="section2">
-            <h4 class="title">Sản phẩm liên quan</h4>
-            <div class="list-product">
                 
-                <div class="row">
-                <?php
-                    $sql_relevant = mysqli_query($conn, "SELECT*FROM item WHERE TypeID in (SELECT TypeID FROM type)");
-                    while($row_relevant = mysqli_fetch_assoc($sql_relevant))
-                    {
-                ?>
-                    <div class="col-md-2">
-                        <div class="menu-item-image">
-                            <a href="#" title="Bạc xỉu">
-                                <img src="../img_WebCoffee/<?php echo $row_relevant['image'] ?>" alt="" width="100%" height="100%">
-                            </a>
-                        </div>
-                        <div class="menu-item-info">
-                            <h3>
-                                <a href="#"><?php echo $row_relevant['Name'] ?></a>
-                            </h3>
-                            <div class="price-item">
-                                <?php echo $row_relevant['Price'] ?> đ
-                            </div>
-                        </div>
-                    </div>
-                    <?php 
-                    }
-                    ?>
-                </div>
             </div>
         </div>
+        
+        <hr>
+            <a href="http://localhost/Wishlist/Menu/wishlist/index.php">Xem danh sách sản phẩm yêu thích</a>
     </div>
   </main>
   <footer>
